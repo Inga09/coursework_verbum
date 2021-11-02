@@ -4,6 +4,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="popupTheme">@style/actionMenu</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/colorAccent</item>
         <!-- MaterialDrawer specific values -->
         <item name="material_drawer_background">@color/material_drawer_background</item>
@@ -21,7 +23,9 @@
 
     </style>>
     <style  name = "AppThemeDark" parent="MaterialDrawerTheme">
-
-
     </style>>
+    <style name="actionMenu" parent="Theme.AppCompat.Light">
+        <item name="background">@color/colorAccent</item>
+        <item name="actionMenuTextColor">@color/colorBlack</item>
+    </style>
 </resources>

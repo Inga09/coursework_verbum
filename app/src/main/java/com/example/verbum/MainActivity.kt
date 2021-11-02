@@ -1,18 +1,26 @@
 package com.example.verbum
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.databinding.ActivityMainBinding
-import com.example.verbum.ui.fragments.BaseFragment
 import com.example.verbum.ui.fragments.ChatsFragment
 import com.example.verbum.ui.objects.AppDrawer
+import com.example.verbum.utilits.AUTH
+import com.example.verbum.utilits.replaceActivity
+import com.example.verbum.utilits.replaceFragment
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 
-open class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAppDrawer: AppDrawer
     private lateinit var mToolbar: Toolbar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +36,16 @@ open class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        setSupportActionBar(mToolbar)
-        mAppDrawer.create()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.dataContainer,
-                ChatsFragment()
-            ).commit()
+        if(AUTH.currentUser!=null){
+            setSupportActionBar(mToolbar)
+            mAppDrawer.create()
+    replaceFragment(ChatsFragment(),false)
+
+        }else {
+            replaceActivity(RegisterActivity())
+
+        }
+
 
     }
 
@@ -41,8 +53,8 @@ open class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this,mToolbar)
+        AUTH = FirebaseAuth.getInstance()
     }
-
 }
 
 

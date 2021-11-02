@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.verbum.R
 import com.example.verbum.ui.SettingsFragment
+import com.example.verbum.utilits.replaceFragment
 //import com.example.verbum.ui.fragments.SettingsFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -76,7 +77,7 @@ class AppDrawer (val mainActivity:AppCompatActivity,val toolbar: Toolbar){
                     .withIcon(R.drawable.ic_menu_invate),
                 PrimaryDrawerItem().withIdentifier(109)
                     .withIconTintingEnabled(true)
-                    .withName("Вопросы о телеграм")
+                    .withName("Вопросы о verbum")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_help)
             ).withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
@@ -86,11 +87,7 @@ class AppDrawer (val mainActivity:AppCompatActivity,val toolbar: Toolbar){
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     when (position) {
-                        7 ->  mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer,
-                                SettingsFragment()
-                            ).commit()
+                        7 ->  mainActivity.replaceFragment(SettingsFragment())
                     }
                     return false
                 }

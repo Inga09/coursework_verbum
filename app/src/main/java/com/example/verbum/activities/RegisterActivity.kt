@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.verbum.R
 import com.example.verbum.databinding.ActivityRegisterBinding
 import com.example.verbum.ui.fragments.EnterPhoneNumberFragment
+import com.example.verbum.utilits.initFirebase
 import com.example.verbum.utilits.replaceFragment
 
 //import com.example.verbum.utilits.replaceActivity
@@ -19,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        initFirebase()
 
     }
 
@@ -27,6 +29,6 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = mBinding.registerToolbar
         setSupportActionBar(mToolbar)
         title = getString(R.string.register_title_your_phone)
-        replaceFragment(EnterPhoneNumberFragment(),false)
+        replaceFragment(EnterPhoneNumberFragment(), false)
     }
 }

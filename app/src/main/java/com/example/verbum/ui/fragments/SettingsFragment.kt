@@ -9,8 +9,10 @@ import com.example.verbum.MainActivity
 import com.example.verbum.R
 import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.ui.fragments.BaseFragment
+import com.example.verbum.ui.fragments.ChangeNameFragment
 import com.example.verbum.utilits.AUTH
 import com.example.verbum.utilits.replaceActivity
+import com.example.verbum.utilits.replaceFragment
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
@@ -30,6 +32,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 AUTH.signOut()
                 (activity as MainActivity).replaceActivity(RegisterActivity())
             }
+            R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
     }

@@ -6,14 +6,21 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.databinding.ActivityMainBinding
+import com.example.verbum.models.User
 import com.example.verbum.ui.fragments.ChatsFragment
 import com.example.verbum.ui.objects.AppDrawer
-import com.example.verbum.utilits.AUTH
-import com.example.verbum.utilits.initFirebase
-import com.example.verbum.utilits.replaceActivity
-import com.example.verbum.utilits.replaceFragment
+import com.example.verbum.utilits.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.FirebaseAuth
+
+
+//import com.example.verbum.utilits.AUTH
+//import com.example.verbum.utilits.initFirebase
+//import com.example.verbum.utilits.replaceActivity
+//import com.example.verbum.utilits.replaceFragment
+//import com.google.firebase.database.DataSnapshot
+//import com.google.firebase.database.DatabaseError
+//import com.google.firebase.database.ValueEventListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,12 +44,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        if(AUTH.currentUser!=null){
+        if (AUTH.currentUser != null) {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-    replaceFragment(ChatsFragment(),false)
+            replaceFragment(ChatsFragment(), false)
 
-        }else {
+        } else {
             replaceActivity(RegisterActivity())
 
         }
@@ -53,11 +60,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
-        mAppDrawer = AppDrawer(this,mToolbar)
+        mAppDrawer = AppDrawer(this, mToolbar)
         //AUTH = FirebaseAuth.getInstance()
         initFirebase()
+        initUser()
+    }
+
+    private fun initUser() {
+        FER_DATABASE_ROOT.child(NODE_USERS).child(UID)
+            .addListenerForSingleValueEvent(AppValueEventListener {
+                USER = it.getValue(User::class.java) ?: User()
+            })
+
     }
 }
+
 
 
 

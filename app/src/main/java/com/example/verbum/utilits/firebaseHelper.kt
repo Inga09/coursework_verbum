@@ -14,7 +14,7 @@ const val NODE_USERS = "users"
 const val CHILD_ID = "id"
 const val CHILD_PHONE = "phone"
 const val CHILD_USERNAME = "username"
-const val CHILD_FULLNAME = "filename"
+const val CHILD_FULLNAME = "fullname"
 
 
 fun initFirebase(){

@@ -14,4 +14,10 @@
     <string name="settings_input_surname">Фамилия</string>
     <string name="settings_toast_name_is_empty">Имя не может быть пустым</string>
     <string name="toast_data_update">Данные обновлены</string>
+    <string name="settings_default_username">settings_default_username</string>
+    <string name="settings_default_status">settings_default_status</string>
+    <string name="settings_default_number">settings_default_number</string>
+    <string name="settings_default_login">settings_default_login</string>
+    <string name="settings_default_bio">string/settings_default_bio</string>
+    <string name="settings_hint_input_username">username</string>
 </resources>

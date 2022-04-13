@@ -18,4 +18,6 @@
         <item name="android:layout_margin">@dimen/horizontal_margin</item>
         <item name="android:inputType">phone</item>
     </style>
+
+    <style name="normalText">normalText</style>
 </resources>

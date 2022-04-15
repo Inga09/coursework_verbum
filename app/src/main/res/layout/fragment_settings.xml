@@ -47,7 +47,7 @@
             android:textColor="@color/colorAccentDark"
             android:textSize="@dimen/smallText"
             app:layout_constraintEnd_toEndOf="parent"
-        @@ -74,7 +75,7 @@
+
         <TextView
             android:id="@+id/settings_phone_number"
             style="@style/normalText"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="@id/settings_btn_change_number_phone"
             tools:ignore="UnknownId" />
 
-        @@ -102,7 +103,7 @@
+
         <TextView
             android:id="@+id/settings_username"
             style="@style/normalText"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toTopOf="@id/settings_btn_change_username"
             tools:ignore="UnknownId" />
 
-        @@ -130,7 +131,7 @@
+
         <TextView
             android:id="@+id/settings_bio"
             style="@style/normalText"

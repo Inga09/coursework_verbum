@@ -20,4 +20,5 @@
     <string name="settings_default_login">settings_default_login</string>
     <string name="settings_default_bio">string/settings_default_bio</string>
     <string name="settings_hint_input_username">username</string>
+    <string name="settings_input_bio">bio</string>
 </resources>

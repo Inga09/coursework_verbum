@@ -1,8 +1,11 @@
 package com.example.verbum.utilits
 
+import android.content.Context
 import android.content.Intent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.verbum.R
 
@@ -40,3 +43,21 @@ fun Fragment.replaceFragment(fragment: Fragment){
             fragment
         )?.commit()
 }
+
+fun hideKeyboard(){
+    val imm: InputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE)
+            as InputMethodManager
+    imm.hideSoftInputFromWindow(APP_ACTIVITY.window.decorView.windowToken,0)
+}
+fun CircleImageView.donwloadAndSetImage(url:String){
+    Picasso.get()
+        .load(url)
+        .placeholder(R.drawable.default_photo)
+        .into(this)
+
+}
+
+
+
+
+

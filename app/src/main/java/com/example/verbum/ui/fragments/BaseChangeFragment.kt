@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.verbum.MainActivity
 import com.example.verbum.R
 import com.example.verbum.utilits.APP_ACTIVITY
+import com.example.verbum.utilits.hideKeyboard
 
 
 open class BaseChangeFragment (layout:Int): Fragment(layout) {
@@ -13,11 +14,12 @@ open class BaseChangeFragment (layout:Int): Fragment(layout) {
         super.onStart()
         setHasOptionsMenu(true)
         (activity as MainActivity).mAppDrawer.disableDrawer()
+        hideKeyboard()
     }
 
     override fun onStop() {
         super.onStop()
-        APP_ACTIVITY.hideKeyboard()
+
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)

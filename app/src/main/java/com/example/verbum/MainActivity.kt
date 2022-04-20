@@ -37,8 +37,12 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         APP_ACTIVITY = this
-        initFields()
-        initFunc()
+        initFirebase()
+        initUser{
+            initFields()
+            initFunc()
+        }
+
     }
 
 
@@ -61,17 +65,10 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
         //AUTH = FirebaseAuth.getInstance()
-        initFirebase()
-        initUser()
-    }
-
-    private fun initUser() {
-        FER_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-            .addListenerForSingleValueEvent(AppValueEventListener {
-                USER = it.getValue(User::class.java) ?: User()
-            })
 
     }
+
+
 
 }
 

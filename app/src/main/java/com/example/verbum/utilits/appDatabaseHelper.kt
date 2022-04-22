@@ -1,6 +1,9 @@
 package com.example.verbum.utilits
 
+import android.annotation.SuppressLint
 import android.net.Uri
+import android.provider.ContactsContract
+import com.example.verbum.models.CommonModel
 import com.example.verbum.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -67,3 +70,32 @@ inline fun initUser(crossinline function: () -> Unit) {
         })
 
 }
+
+@SuppressLint("Range")
+fun initContacts() {
+    if (checkPermission(READ_CONTACTS)){
+        var arrayContacts = arrayListOf<CommonModel>()
+        val cursor = APP_ACTIVITY.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+        cursor?.let {
+            while (it.moveToNext()){
+                /* Читаем телефонную книгу пока есть следующие элементы */
+                val fullName = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                val phone = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val newModel = CommonModel()
+                newModel.fullname = fullName
+                newModel.phone = phone.replace(Regex("[\\s,-]"),"")
+                arrayContacts.add(newModel)
+            }
+        }
+        cursor?.close()
+    }
+        //val array = arrayOfNulls<Int>(900000)
+        //array.forEach { println(it) }
+        // showToast("Чтение контактов")
+    }

@@ -14,11 +14,20 @@
     <string name="settings_input_surname">Фамилия</string>
     <string name="settings_toast_name_is_empty">Имя не может быть пустым</string>
     <string name="toast_data_update">Данные обновлены</string>
-    <string name="settings_default_username">settings_default_username</string>
-    <string name="settings_default_status">settings_default_status</string>
-    <string name="settings_default_number">settings_default_number</string>
-    <string name="settings_default_login">settings_default_login</string>
-    <string name="settings_default_bio">string/settings_default_bio</string>
+    <!--<string name="settings_default_username">settings_default_username</string>-->
+   <!-- <string name="settings_default_status">settings_default_status</string>
+    <string name="settings_default_number">settings_default_number</string>-->
+    <!--<string name="settings_default_login">settings_default_login</string>-->
+    <!--<string name="settings_default_bio">string/settings_default_bio</string>-->
     <string name="settings_hint_input_username">username</string>
     <string name="settings_input_bio">bio</string>
+    <string name="settings_default_username">Inga Arturovna</string>
+    <string name="settings_default_status">в сети</string>
+    <string name="settings_text_account">Аккаунт</string>
+    <string name="settings_default_number">79022834439</string>
+    <string name="settings_label_phone_number">Нажмите,чтобы изменить номер телефона</string>
+    <string name="settings_default_login">inga</string>
+    <string name="settings_label_login">Имя пользователя</string>
+    <string name="settings_default_bio">О себе</string>
+    <string name="settings_label_bio">Напишите немного о себе</string>
 </resources>

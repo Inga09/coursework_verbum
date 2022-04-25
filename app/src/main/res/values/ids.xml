@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="settings_user_photo" type="id">settings_user_photo</item>
-    <item name="settings_btn_change_number_phone" type="id">settings_btn_change_number_phone</item>
-    <item name="settings_btn_change_username" type="id">settings_btn_change_username</item>
-    <item name="settings_btn_change_bio" type="id">settings_btn_change_bio</item>
-</resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/horizontal_margin"
     style="@style/settingsButtons"
@@ -18,7 +19,7 @@
     <TextView
         android:id="@+id/contact_fullname"
         style="@style/normalText"
-        tools:text="Inga"
+        tools:text="Inga Arturovna"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
         app:layout_constraintTop_toTopOf="parent"/>
 

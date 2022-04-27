@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.firebaseui:firebase-ui-database:8.0.1'
 
     implementation "com.mikepenz:materialdrawer-nav:7.0.0"
 }

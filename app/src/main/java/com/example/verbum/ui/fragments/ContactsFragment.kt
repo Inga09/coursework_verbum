@@ -1,7 +1,5 @@
 package com.example.verbum.ui.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import com.example.verbum.models.CommonModel
 import com.example.verbum.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*
@@ -73,8 +70,8 @@ class   ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     }
     // Холдер для захвата ViewGroup
     class ContactsHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.contact_fullname
-        val status: TextView = view.contact_status
+        val name: TextView = view.toolbar_chat_fullname
+        val status: TextView = view.toolbar_chat_status
         val photo: CircleImageView = view.contact_photo
     }
     override fun onPause() {

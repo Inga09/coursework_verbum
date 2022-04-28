@@ -1,20 +1,15 @@
 package com.example.verbum
 
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.databinding.ActivityMainBinding
-import com.example.verbum.models.User
 import com.example.verbum.ui.fragments.ChatsFragment
 import com.example.verbum.ui.objects.AppDrawer
 import com.example.verbum.utilits.*
-import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

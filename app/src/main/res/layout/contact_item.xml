@@ -17,18 +17,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/contact_fullname"
+        android:id="@+id/toolbar_chat_fullname"
         style="@style/normalText"
         tools:text="Inga Arturovna"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/contact_status"
+        android:id="@+id/toolbar_chat_status"
         style="@style/smallText"
         tools:text="в сети"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
-        app:layout_constraintTop_toBottomOf="@id/contact_fullname"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar_chat_fullname"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

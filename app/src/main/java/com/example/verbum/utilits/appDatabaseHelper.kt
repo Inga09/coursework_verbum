@@ -73,7 +73,7 @@ inline fun initUser(crossinline function: () -> Unit) {
 
 }
 
-@SuppressLint("Range")
+
 fun initContacts() {
     if (checkPermission(READ_CONTACTS)){
         var arrayContacts = arrayListOf<CommonModel>()

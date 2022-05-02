@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.verbum.R
 import com.example.verbum.databinding.FragmentChatsBinding
+import com.example.verbum.utilits.APP_ACTIVITY
 
 
 class ChatsFragment : Fragment() {
@@ -15,7 +16,7 @@ class ChatsFragment : Fragment() {
 
         override fun onResume() {
             super.onResume()
-
+            APP_ACTIVITY.title = "Чаты"
         }
     }
 }

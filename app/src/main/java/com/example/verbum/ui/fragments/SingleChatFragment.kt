@@ -11,6 +11,7 @@ import com.example.verbum.models.UserModel
 import com.example.verbum.utilits.*
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_single_chat.*
 import kotlinx.android.synthetic.main.toolbar_info.view.*
 
 
@@ -33,9 +34,19 @@ class SingleChatFragment(private val contact: CommonModel) :
 
             mRefUser = FER_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
             mRefUser.addValueEventListener(mListenerInfoToolbar)
+            chat_btn_send_message.setOnClickListener {
+                val message = chat_input_message.text.toString()
+                if (message.isEmpty()){
+                    showToast("ВВедите сообщение")
+                } else sendMessage(message,contact.id, TYPE_TEXT){
+                    chat_input_message.setText("")
+                }
+            }
         }
 
-        private fun initInfoToolbar() {
+
+
+    private fun initInfoToolbar() {
             if (mReceivingUser.fullname.isEmpty()) {
                 mToolbarInfo.toolbar_chat_fullname.text = contact.fullname
             } else mToolbarInfo.toolbar_chat_fullname.text = mReceivingUser.fullname

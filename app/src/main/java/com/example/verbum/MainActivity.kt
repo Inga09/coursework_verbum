@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.databinding.ActivityMainBinding
-import com.example.verbum.ui.fragments.ChatsFragment
+import com.example.verbum.ui.fragments.MainFragment
+import com.example.verbum.ui.fragments.register.EnterPhoneNumberFragment
 import com.example.verbum.ui.objects.AppDrawer
 import com.example.verbum.utilits.*
 import kotlinx.coroutines.CoroutineScope
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment(), false)
+            replaceFragment(MainFragment(), false)
 
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(),false)
 
         }
 

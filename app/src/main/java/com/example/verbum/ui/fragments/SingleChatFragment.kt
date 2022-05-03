@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
 import com.example.verbum.utilits.*
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_single_chat.*
@@ -22,42 +24,72 @@ class SingleChatFragment(private val contact: CommonModel) :
         private lateinit var mReceivingUser: UserModel
         private lateinit var mToolbarInfo:View
         private lateinit var mRefUser: DatabaseReference
+    private lateinit var mRefMessages: DatabaseReference
+    private lateinit var mAdapter: SingleChatAdapter
+    private lateinit var mRecyclerView: RecyclerView
+        private lateinit var mMessagesListener: ChildEventListener
+        private var mListMessages = mutableListOf<CommonModel>()
 
-        override fun onResume() {
+    override fun onResume() {
         super.onResume()
+        initToolbar()
+        initRecycleView()
+    }
+    private fun initRecycleView() {
+        mRecyclerView = chat_recycle_view
+        mAdapter = SingleChatAdapter()
+
+        mRefMessages = FER_DATABASE_ROOT
+            .child(NODE_MESSAGES)
+            .child(CURRENT_UID)
+            .child(contact.id)
+        mRecyclerView.adapter = mAdapter
+            mMessagesListener = AppChildEventListener{
+                mAdapter.addItem(it.getCommonModel())
+                mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+            }
+
+
+
+            mRefMessages.addChildEventListener(mMessagesListener)
+        }
+
+        private fun initToolbar() {
             mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_info
             mToolbarInfo.visibility = View.VISIBLE
             mListenerInfoToolbar = AppValueEventListener {
                 mReceivingUser = it.getUserModel()
                 initInfoToolbar()
             }
-
-            mRefUser = FER_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
+            mRefUser = FER_DATABASE_ROOT.child(
+                NODE_USERS
+            ).child(contact.id)
             mRefUser.addValueEventListener(mListenerInfoToolbar)
+
             chat_btn_send_message.setOnClickListener {
                 val message = chat_input_message.text.toString()
-                if (message.isEmpty()){
+                if (message.isEmpty()) {
                     showToast("ВВедите сообщение")
-                } else sendMessage(message,contact.id, TYPE_TEXT){
+                } else sendMessage(
+                    message,
+                    contact.id,
+                    TYPE_TEXT
+                ) {
                     chat_input_message.setText("")
                 }
             }
         }
-
-
-
-    private fun initInfoToolbar() {
+        private fun initInfoToolbar() {
             if (mReceivingUser.fullname.isEmpty()) {
                 mToolbarInfo.toolbar_chat_fullname.text = contact.fullname
             } else mToolbarInfo.toolbar_chat_fullname.text = mReceivingUser.fullname
             mToolbarInfo.toolbar_chat_image.downloadAndSetImage(mReceivingUser.photoUrl)
             mToolbarInfo.toolbar_chat_status.text = mReceivingUser.state
+        }
+        override fun onPause() {
+            super.onPause()
+            mToolbarInfo.visibility = View.GONE
+            mRefUser.removeEventListener(mListenerInfoToolbar)
+            mRefMessages.removeEventListener(mMessagesListener)
+        }
     }
-
-    override fun onPause() {
-        super.onPause()
-        mToolbarInfo.visibility = View.GONE
-        mRefUser.removeEventListener(mListenerInfoToolbar)
-
-    }
-}

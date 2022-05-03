@@ -14,12 +14,10 @@
         android:theme="@style/AppThemeLight">
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,20 +4,15 @@ package com.example.verbum.ui
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.net.Uri
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.verbum.R
-import com.example.verbum.activities.RegisterActivity
 import com.example.verbum.ui.fragments.BaseFragment
 import com.example.verbum.ui.fragments.ChangeBioFragment
 import com.example.verbum.ui.fragments.ChangeNameFragment
 import com.example.verbum.ui.fragments.ChangeUsernameFragment
 import com.example.verbum.utilits.*
-import com.google.firebase.storage.StorageReference
-import com.mikepenz.materialdrawer.icons.MaterialDrawerFont.url
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -61,7 +56,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             R.id.settings_menu_exit -> {
                 AppStates.updateState(AppStates.OFFLINE)
                 AUTH.signOut()
-                APP_ACTIVITY.replaceActivity(RegisterActivity())
+                restartActivity()
             }
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }

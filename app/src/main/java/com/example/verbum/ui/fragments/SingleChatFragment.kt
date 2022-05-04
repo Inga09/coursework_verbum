@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
 import com.example.verbum.models.CommonModel
@@ -24,11 +25,16 @@ class SingleChatFragment(private val contact: CommonModel) :
         private lateinit var mReceivingUser: UserModel
         private lateinit var mToolbarInfo:View
         private lateinit var mRefUser: DatabaseReference
-    private lateinit var mRefMessages: DatabaseReference
-    private lateinit var mAdapter: SingleChatAdapter
-    private lateinit var mRecyclerView: RecyclerView
-        private lateinit var mMessagesListener: ChildEventListener
-        private var mListMessages = mutableListOf<CommonModel>()
+        private lateinit var mRefMessages: DatabaseReference
+        private lateinit var mAdapter: SingleChatAdapter
+        private lateinit var mRecyclerView: RecyclerView
+        //private lateinit var mMessagesListener: ChildEventListener
+        //private var mListMessages = mutableListOf<CommonModel>()
+        private lateinit var mMessagesListener: AppChildEventListener
+        private var mCountMessages = 10
+        private var mIsScrolling = false
+        private var mSmoothScrollToPosition = true
+        private var mListListeners = mutableListOf<AppChildEventListener>()
 
     override fun onResume() {
         super.onResume()
@@ -46,13 +52,44 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRecyclerView.adapter = mAdapter
             mMessagesListener = AppChildEventListener{
                 mAdapter.addItem(it.getCommonModel())
-                mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+                if (mSmoothScrollToPosition) {
+                    mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+                }
+                //mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
             }
 
 
 
-            mRefMessages.addChildEventListener(mMessagesListener)
+            mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+             mListListeners.add(mMessagesListener)
+
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (mIsScrolling && dy < 0) {
+                    updateData()
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    mIsScrolling = true
+                }
+            }
+        })
         }
+    private fun updateData() {
+        mSmoothScrollToPosition = false
+        mIsScrolling = false
+        mCountMessages += 10
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+        mListListeners.add(mMessagesListener)
+    }
+
+
+
 
         private fun initToolbar() {
             mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_info
@@ -67,6 +104,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             mRefUser.addValueEventListener(mListenerInfoToolbar)
 
             chat_btn_send_message.setOnClickListener {
+                mSmoothScrollToPosition = true
                 val message = chat_input_message.text.toString()
                 if (message.isEmpty()) {
                     showToast("ВВедите сообщение")
@@ -90,6 +128,12 @@ class SingleChatFragment(private val contact: CommonModel) :
             super.onPause()
             mToolbarInfo.visibility = View.GONE
             mRefUser.removeEventListener(mListenerInfoToolbar)
-            mRefMessages.removeEventListener(mMessagesListener)
+            //mRefMessages.removeEventListener(mMessagesListener)
+            mListListeners.forEach {
+                mRefMessages.removeEventListener(it)
+            }
+
+            println()
+
         }
     }

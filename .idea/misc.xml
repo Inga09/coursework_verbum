@@ -19,6 +19,7 @@
         <entry key="..\:/Users/cutth/AndroidStudioProjects/verbum/app/src/main/res/menu/settings_action_menu.xml" value="0.225" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/bg_receiving_message.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/bg_user_message.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_attach.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_confirm_change.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_send.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ripple_effect.xml" value="0.24114583333333334" />
@@ -34,7 +35,7 @@
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_contacts.xml" value="0.178125" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_enter_phone_number.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_settings.xml" value="0.2033514492753623" />
-        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_single_chat.xml" value="0.33" />
+        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_single_chat.xml" value="0.2303370786516854" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/message_item.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/toolbar_info.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/menu/settings_action_menu.xml" value="0.12135416666666667" />

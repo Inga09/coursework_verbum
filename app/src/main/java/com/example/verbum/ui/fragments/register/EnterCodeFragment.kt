@@ -30,19 +30,32 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) : Fragment(R.la
                 val dateMap = mutableMapOf<String,Any>()
                 dateMap[CHILD_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
-                dateMap[CHILD_USERNAME] = uid
+                //dateMap[CHILD_USERNAME] = uid
 
-                FER_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
-                    .addOnFailureListener { showToast(it.message.toString()) }
-                    .addOnSuccessListener {
-                        FER_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                            .addOnSuccessListener {
-                                showToast("Добро пожаловать")
-                                restartActivity()
-                            }
+
+                FER_DATABASE_ROOT.child(NODE_USERS).child(uid)
+                    .addListenerForSingleValueEvent(AppValueEventListener {
+
+                        if (!it.hasChild(CHILD_USERNAME)) {
+                            dateMap[CHILD_USERNAME] = uid
+                        }
+                        FER_DATABASE_ROOT.child(
+                            NODE_PHONES
+                        ).child(phoneNumber).setValue(uid)
                             .addOnFailureListener { showToast(it.message.toString()) }
+                            .addOnSuccessListener {
+                                FER_DATABASE_ROOT.child(
+                                    NODE_USERS
+                                ).child(uid).updateChildren(dateMap)
+                                    .addOnSuccessListener {
+                                        showToast("Добро пожаловать")
+                                        restartActivity()
+                                    }
+                                    .addOnFailureListener { showToast(it.message.toString()) }
+                            }
+                    })
 
-                }
+
             }else showToast(task.exception?.message.toString())
         }
     }

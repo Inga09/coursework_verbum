@@ -1,8 +1,8 @@
 package com.example.verbum.ui.fragments.register
 
 import androidx.fragment.app.Fragment
-import com.example.verbum.MainActivity
 import com.example.verbum.R
+import com.example.verbum.database.*
 import com.example.verbum.utilits.*
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.fragment_enter_code.*

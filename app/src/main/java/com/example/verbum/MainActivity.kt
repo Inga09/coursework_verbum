@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.example.verbum.database.AUTH
+import com.example.verbum.database.initFirebase
+import com.example.verbum.database.initUser
 import com.example.verbum.databinding.ActivityMainBinding
 import com.example.verbum.ui.fragments.MainFragment
 import com.example.verbum.ui.fragments.register.EnterPhoneNumberFragment
@@ -15,8 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-//import com.example.verbum.utilits.AUTH
-//import com.example.verbum.utilits.initFirebase
+//import com.example.verbum.database.getAUTH
+//import com.example.verbum.database.initFirebase
 //import com.example.verbum.utilits.replaceActivity
 //import com.example.verbum.utilits.replaceFragment
 //import com.google.firebase.database.DataSnapshot

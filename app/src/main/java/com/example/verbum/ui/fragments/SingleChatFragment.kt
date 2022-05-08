@@ -3,22 +3,19 @@ package com.example.verbum.ui.fragments
 import android.Manifest.permission.RECORD_AUDIO
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.net.Uri
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.verbum.R
+import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
 import com.example.verbum.utilits.*
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -48,6 +45,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         //private var mListListeners = mutableListOf<AppChildEventListener>()
         private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
         private lateinit var mLayoutManager: LinearLayoutManager
+        private lateinit var mAppVoiceRecorder: AppVoiceRecorder
 
     override fun onResume() {
         super.onResume()
@@ -57,11 +55,12 @@ class SingleChatFragment(private val contact: CommonModel) :
         initRecycleView()
     }
     private fun initFields() {
+        mAppVoiceRecorder = AppVoiceRecorder()
         mSwipeRefreshLayout = chat_swipe_refresh
         mLayoutManager = LinearLayoutManager(this.context)
         chat_input_message.addTextChangedListener(AppTextWatcher {
             val string = chat_input_message.text.toString()
-            if (string.isEmpty()||string == "Запись") {
+            if (string.isEmpty() || string == "Запись") {
                 chat_btn_send_message.visibility = View.GONE
                 chat_btn_attach.visibility = View.VISIBLE
                 chat_btn_voice.visibility = View.VISIBLE
@@ -76,15 +75,26 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         CoroutineScope(Dispatchers.IO).launch {
             chat_btn_voice.setOnTouchListener { v, event ->
-                if (checkPermission(RECORD_AUDIO)){
-                    if (event.action == MotionEvent.ACTION_DOWN){
+                if (checkPermission(RECORD_AUDIO)) {
+                    if (event.action == MotionEvent.ACTION_DOWN) {
                         //TODO record
                         chat_input_message.setText("Запись")
-                        chat_btn_voice.setColorFilter(ContextCompat.getColor(APP_ACTIVITY,R.color.primary))
-                    } else if (event.action == MotionEvent.ACTION_UP){
+                        chat_btn_voice.setColorFilter(
+                            ContextCompat.getColor(
+                                APP_ACTIVITY,
+                                R.color.primary
+                            )
+                        )
+                        val messageKey = getMessageKey(contact.id)
+                        mAppVoiceRecorder.startRecord(messageKey)
+                    } else if (event.action == MotionEvent.ACTION_UP) {
                         //TODO stop record
                         chat_input_message.setText("")
                         chat_btn_voice.colorFilter = null
+                        mAppVoiceRecorder.stopRecord { file, messageKey ->
+                            uploadFileToStorage(Uri.fromFile(file),messageKey,contact.id, TYPE_MESSAGE_VOICE)
+                            mSmoothScrollToPosition = true
+                        }
                     }
                 }
                 true
@@ -99,7 +109,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         CropImage.activity()
             .setAspectRatio(1, 1)
             .setRequestedSize(250, 250)
-            .start(APP_ACTIVITY,this)
+            .start(APP_ACTIVITY, this)
     }
     private fun initRecycleView() {
         mRecyclerView = chat_recycle_view
@@ -206,18 +216,10 @@ class SingleChatFragment(private val contact: CommonModel) :
             && resultCode == Activity.RESULT_OK && data != null
         ) {
             val uri = CropImage.getActivityResult(data).uri
-            val messageKey = FER_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
-                .child(contact.id).push().key.toString()
+            val messageKey = getMessageKey(contact.id)
 
-            val path = FER_STORAGE_ROOT
-                .child(FOLDER_MESSAGE_IMAGE)
-                .child(messageKey)
-            putImageToStorage(uri, path) {
-                getUrlFromStorage(path) {
-                    sendMessageAsImage(contact.id,it,messageKey)
-                    mSmoothScrollToPosition = true
-                }
-            }
+            uploadFileToStorage(uri,messageKey,contact.id, TYPE_MESSAGE_IMAGE)
+            mSmoothScrollToPosition = true
         }
     }
 
@@ -228,4 +230,8 @@ class SingleChatFragment(private val contact: CommonModel) :
             mRefMessages.removeEventListener(mMessagesListener)
 
         }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mAppVoiceRecorder.releaseRecorder()
+    }
     }

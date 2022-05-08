@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.verbum.MainActivity
 import com.example.verbum.R
+import com.example.verbum.database.updatePhonesToDatabase
 import com.example.verbum.models.CommonModel
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat

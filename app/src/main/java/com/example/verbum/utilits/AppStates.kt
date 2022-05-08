@@ -1,5 +1,7 @@
 package com.example.verbum.utilits
 
+import com.example.verbum.database.*
+
 enum class AppStates(val state:String) {
     ONLINE("в сети"),
     OFFLINE("был недавно"),

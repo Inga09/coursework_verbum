@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.verbum.R
+import com.example.verbum.database.*
 import com.example.verbum.ui.fragments.BaseFragment
 import com.example.verbum.ui.fragments.ChangeBioFragment
 import com.example.verbum.ui.fragments.ChangeNameFragment
@@ -72,7 +73,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             val path = FER_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
 
-            putImageToStorage(uri, path) {
+            putFileToStorage(uri, path) {
                 getUrlFromStorage(path) {
                     putUrlToDatabase(it) {
                         settings_user_photo.downloadAndSetImage(it)

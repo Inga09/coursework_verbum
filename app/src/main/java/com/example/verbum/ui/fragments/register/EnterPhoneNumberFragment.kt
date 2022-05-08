@@ -1,8 +1,8 @@
 package com.example.verbum.ui.fragments.register
 
 import androidx.fragment.app.Fragment
-import com.example.verbum.MainActivity
 import com.example.verbum.R
+import com.example.verbum.database.AUTH
 import com.example.verbum.utilits.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential

@@ -1,21 +1,14 @@
-package com.example.verbum.ui.fragments
+package com.example.verbum.ui.screens
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.verbum.database.CURRENT_UID
-import com.example.verbum.models.CommonModel
-import com.example.verbum.ui.fragments.message_recyler_view.view_holder.AppHolderFactory
-import com.example.verbum.ui.fragments.message_recyler_view.view_holder.HolderImageMessage
-import com.example.verbum.ui.fragments.message_recyler_view.view_holder.HolderTextMessage
-import com.example.verbum.ui.fragments.message_recyler_view.view_holder.HolderVoiceMessage
-import com.example.verbum.ui.fragments.message_recyler_view.views.MessageView
-import com.example.verbum.utilits.asTime
-import com.example.verbum.utilits.downloadAndSetImage
+import com.example.verbum.ui.screens.message_recyler_view.view_holder.*
+import com.example.verbum.ui.screens.message_recyler_view.views.MessageView
 
 class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mListMessagesCache = mutableListOf<MessageView>()
+    private var mListHolders = mutableListOf<MessageHolder>()
 
 
 
@@ -32,15 +25,18 @@ class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HolderImageMessage -> holder.drawMessageImage(holder, mListMessagesCache[position])
-            is HolderTextMessage -> holder.drawMessageText(holder, mListMessagesCache[position])
-            is HolderVoiceMessage -> holder.drawMessageVoice(holder, mListMessagesCache[position])
-            else -> {
-            }
-        }
+        (holder as MessageHolder).drawMessage(mListMessagesCache[position])
     }
-
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        (holder as MessageHolder).onAttach(mListMessagesCache[holder.adapterPosition])
+        mListHolders.add((holder as MessageHolder))
+        super.onViewAttachedToWindow(holder)
+    }
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        (holder as MessageHolder).onDetach()
+        mListHolders.remove((holder as MessageHolder))
+        super.onViewDetachedFromWindow(holder)
+    }
 
     fun addItemToBottom(item: MessageView,
                         onSuccess: () -> Unit){
@@ -49,6 +45,11 @@ class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             notifyItemInserted(mListMessagesCache.size)
         }
         onSuccess()
+    }
+    fun onDestroy() {
+        mListHolders.forEach {
+            it.onDetach()
+        }
     }
 
     fun addItemToTop(item: MessageView,

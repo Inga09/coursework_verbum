@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments
+package com.example.verbum.ui.screens
 
 import com.example.verbum.R
 import com.example.verbum.database.USER

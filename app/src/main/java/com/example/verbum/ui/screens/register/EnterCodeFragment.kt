@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments.register
+package com.example.verbum.ui.screens.register
 
 import androidx.fragment.app.Fragment
 import com.example.verbum.R

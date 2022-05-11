@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments
+package com.example.verbum.ui.screens
 
 import android.Manifest.permission.RECORD_AUDIO
 import android.app.Activity
@@ -15,7 +15,7 @@ import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
-import com.example.verbum.ui.fragments.message_recyler_view.views.AppViewFactory
+import com.example.verbum.ui.screens.message_recyler_view.views.AppViewFactory
 import com.example.verbum.utilits.*
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
@@ -234,5 +234,6 @@ class SingleChatFragment(private val contact: CommonModel) :
     override fun onDestroyView() {
         super.onDestroyView()
         mAppVoiceRecorder.releaseRecorder()
+        mAdapter.onDestroy()
     }
     }

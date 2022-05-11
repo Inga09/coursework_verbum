@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments.message_recyler_view.views
+package com.example.verbum.ui.screens.message_recyler_view.views
 
 interface MessageView {
 

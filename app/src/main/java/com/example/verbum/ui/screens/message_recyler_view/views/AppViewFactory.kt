@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments.message_recyler_view.views
+package com.example.verbum.ui.screens.message_recyler_view.views
 
 import com.example.verbum.models.CommonModel
 import com.example.verbum.utilits.TYPE_MESSAGE_IMAGE

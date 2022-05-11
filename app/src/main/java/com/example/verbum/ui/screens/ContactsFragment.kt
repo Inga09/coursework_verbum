@@ -1,4 +1,4 @@
-package com.example.verbum.ui.fragments
+package com.example.verbum.ui.screens
 
 import android.view.LayoutInflater
 import android.view.View

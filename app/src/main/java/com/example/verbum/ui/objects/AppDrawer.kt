@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.verbum.R
 import com.example.verbum.ui.SettingsFragment
-import com.example.verbum.ui.fragments.ContactsFragment
+import com.example.verbum.ui.screens.ContactsFragment
 import com.example.verbum.utilits.APP_ACTIVITY
 import com.example.verbum.database.USER
 import com.example.verbum.utilits.downloadAndSetImage

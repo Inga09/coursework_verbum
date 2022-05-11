@@ -1,14 +1,14 @@
-package com.example.verbum.ui.fragments.message_recyler_view.views
+package com.example.verbum.ui.screens.message_recyler_view.views
 
-class ViewTextMessage(
+data class ViewVoiceMessage(
     override val id: String,
     override val from: String,
     override val timeStamp: String,
-    override val fileUrl: String="",
-    override val text: String
+    override val fileUrl: String,
+    override val text: String = ""
 ) : MessageView {
     override fun getTypeView(): Int {
-        return MessageView.MESSAGE_TEXT
+        return MessageView.MESSAGE_VOICE
     }
 
     override fun equals(other: Any?): Boolean {

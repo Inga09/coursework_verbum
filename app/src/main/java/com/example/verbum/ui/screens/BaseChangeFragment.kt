@@ -1,11 +1,9 @@
-package com.example.verbum.ui.fragments
+package com.example.verbum.ui.screens
 
-import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.example.verbum.MainActivity
 import com.example.verbum.R
-import com.example.verbum.utilits.APP_ACTIVITY
 import com.example.verbum.utilits.hideKeyboard
 
 

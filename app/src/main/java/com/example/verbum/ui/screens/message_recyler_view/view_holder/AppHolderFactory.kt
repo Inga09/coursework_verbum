@@ -1,10 +1,10 @@
-package com.example.verbum.ui.fragments.message_recyler_view.view_holder
+package com.example.verbum.ui.screens.message_recyler_view.view_holder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
-import com.example.verbum.ui.fragments.message_recyler_view.views.MessageView
+import com.example.verbum.ui.screens.message_recyler_view.views.MessageView
 
 class AppHolderFactory {
     companion object {

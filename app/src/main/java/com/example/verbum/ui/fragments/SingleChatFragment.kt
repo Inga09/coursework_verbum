@@ -15,6 +15,7 @@ import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
+import com.example.verbum.ui.fragments.message_recyler_view.views.AppViewFactory
 import com.example.verbum.utilits.*
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
@@ -127,12 +128,12 @@ class SingleChatFragment(private val contact: CommonModel) :
                 val message = it.getCommonModel()
 
                 if (mSmoothScrollToPosition) {
-                    mAdapter.addItemToBottom(message) {
+                    mAdapter.addItemToBottom(AppViewFactory.getView(message)) {
                         mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
                     }
                     //mSwipeRefreshLayout.isRefreshing = false
                 } else {
-                    mAdapter.addItemToTop(message) {
+                    mAdapter.addItemToTop(AppViewFactory.getView(message)) {
                         mSwipeRefreshLayout.isRefreshing = false
                     }
                     //mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)

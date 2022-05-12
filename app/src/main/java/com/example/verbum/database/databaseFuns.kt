@@ -174,24 +174,21 @@ fun sendMessageAsFile(
     receivingUserID: String,
     fileUrl: String,
     messageKey: String,
-    typeMessage: String
+    typeMessage: String,
+    filename: String
 ) {
 
     val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserID"
     val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserID/$CURRENT_UID"
 
     val mapMessage = hashMapOf<String, Any>()
-    //mapMessage[CHILD_FROM] = CURRENT_UID
-   // mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
-    mapMessage[CHILD_FROM] =
-        CURRENT_UID
+
+    mapMessage[CHILD_FROM] = CURRENT_UID
     mapMessage[CHILD_TYPE] = typeMessage
     mapMessage[CHILD_ID] = messageKey
-    //mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
-   // mapMessage[CHILD_FILE_URL] = imageUrl
-    mapMessage[CHILD_TIMESTAMP] =
-        ServerValue.TIMESTAMP
+    mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
     mapMessage[CHILD_FILE_URL] = fileUrl
+    mapMessage[CHILD_TEXT] = filename
 
 
     val mapDialog = hashMapOf<String, Any>()
@@ -208,7 +205,7 @@ fun getMessageKey(id: String) = FER_DATABASE_ROOT.child(
 ).child(CURRENT_UID)
     .child(id).push().key.toString()
 
-fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID: String, typeMessage: String) {
+fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID: String, typeMessage: String,filename:String = "") {
     val path = FER_STORAGE_ROOT.child(
         FOLDER_FILES
     ).child(messageKey)
@@ -218,7 +215,8 @@ fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID: String, typeMe
                 receivedID,
                 it,
                 messageKey,
-                typeMessage
+                typeMessage,
+                filename
             )
         }
     }

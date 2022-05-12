@@ -12,6 +12,7 @@ class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return AppHolderFactory.getHolder(parent, viewType)

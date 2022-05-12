@@ -210,6 +210,7 @@ class SingleChatFragment(private val contact: CommonModel) :
                     contact.id,
                     TYPE_TEXT
                 ) {
+                    saveToMainList(contact.id, TYPE_CHAT)
                     chat_input_message.setText("")
                 }
             }

@@ -30,4 +30,6 @@
     <string name="settings_label_login">Имя пользователя</string>
     <string name="settings_default_bio">О себе</string>
     <string name="settings_label_bio">Напишите немного о себе</string>
+    <string name="clear_chat">Очистить чат</string>
+    <string name="delete_chat">Удалить чат</string>
 </resources>

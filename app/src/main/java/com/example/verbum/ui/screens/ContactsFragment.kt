@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
+import com.example.verbum.ui.screens.single_chat.SingleChatFragment
 import com.example.verbum.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions

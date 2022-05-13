@@ -1,11 +1,9 @@
-package com.example.verbum.ui.screens
+package com.example.verbum.ui.screens.single_chat
 
 import android.Manifest.permission.RECORD_AUDIO
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +13,8 @@ import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
+import com.example.verbum.ui.screens.BaseFragment
+import com.example.verbum.ui.screens.main_list.MainListFragment
 import com.example.verbum.ui.screens.message_recyler_view.views.AppViewFactory
 import com.example.verbum.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -55,6 +55,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         initRecycleView()
     }
     private fun initFields() {
+        setHasOptionsMenu(true)
         mBottomSheetBehavior= BottomSheetBehavior.from(bottom_sheet_choice)
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         mAppVoiceRecorder = AppVoiceRecorder()
@@ -258,4 +259,27 @@ class SingleChatFragment(private val contact: CommonModel) :
         mAppVoiceRecorder.releaseRecorder()
         mAdapter.onDestroy()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        /* Создания выпадающего меню*/
+        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        /* Слушатель выбора пунктов выпадающего меню */
+        when (item.itemId) {
+            R.id.menu_clear_chat -> clearChat(contact.id){
+                showToast("Чат очищен")
+                replaceFragment(MainListFragment())
+            }
+            R.id.menu_delete_chat -> deleteChat(contact.id){
+                showToast("Чат удален")
+                replaceFragment(MainListFragment())
+            }
+
+        }
+        return true
+    }
+
+    }
+

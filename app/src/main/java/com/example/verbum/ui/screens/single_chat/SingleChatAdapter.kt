@@ -1,4 +1,4 @@
-package com.example.verbum.ui.screens
+package com.example.verbum.ui.screens.single_chat
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

@@ -9,7 +9,7 @@ import com.example.verbum.database.AUTH
 import com.example.verbum.database.initFirebase
 import com.example.verbum.database.initUser
 import com.example.verbum.databinding.ActivityMainBinding
-import com.example.verbum.ui.screens.MainFragment
+import com.example.verbum.ui.screens.main_list.MainListFragment
 import com.example.verbum.ui.screens.register.EnterPhoneNumberFragment
 import com.example.verbum.ui.objects.AppDrawer
 import com.example.verbum.utilits.*
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
             mAppDrawer.create()
-            replaceFragment(MainFragment(), false)
+            replaceFragment(MainListFragment(), false)
 
         } else {
             replaceFragment(EnterPhoneNumberFragment(),false)

@@ -5,13 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
-import com.example.verbum.utilits.APP_ACTIVITY
-import com.example.verbum.utilits.AppValueEventListener
-import com.example.verbum.utilits.hideKeyboard
-import com.example.verbum.utilits.replaceFragment
+import com.example.verbum.ui.screens.base.BaseFragment
+import com.example.verbum.utilits.*
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
-class AddContactsFragment: Fragment(R.layout.fragment_add_contacts) {
+class AddContactsFragment: BaseFragment(R.layout.fragment_add_contacts) {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
     private val mRefMainList = FER_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID)
@@ -20,13 +18,16 @@ class AddContactsFragment: Fragment(R.layout.fragment_add_contacts) {
     private var mListItems = listOf<CommonModel>()
 
     override fun onResume() {
+        listContacts.clear()
         super.onResume()
         APP_ACTIVITY.title = "Добавить участника"
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
+       // APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            replaceFragment(CreateGroupFragment(listContacts))
+            //replaceFragment(CreateGroupFragment(listContacts))
+            if (listContacts.isEmpty()) showToast("Добавьте участника")
+            else replaceFragment(CreateGroupFragment(listContacts))
         }
     }
 

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_add_contacts.*
 class AddContactsFragment: BaseFragment(R.layout.fragment_add_contacts) {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
-    private val mRefMainList = FER_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID)
+    private val mRefContactsList = FER_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
     private val mRefUsers = FER_DATABASE_ROOT.child(NODE_USERS)
     private val mRefMessages = FER_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
     private var mListItems = listOf<CommonModel>()
@@ -36,7 +36,7 @@ class AddContactsFragment: BaseFragment(R.layout.fragment_add_contacts) {
         mAdapter = AddContactsAdapter()
 
         // 1 запрос
-        mRefMainList.addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot ->
+        mRefContactsList.addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot ->
             mListItems = dataSnapshot.children.map { it.getCommonModel() }
             mListItems.forEach { model ->
 

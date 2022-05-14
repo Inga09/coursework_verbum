@@ -8,6 +8,7 @@ import com.example.verbum.models.CommonModel
 import com.example.verbum.utilits.APP_ACTIVITY
 import com.example.verbum.utilits.AppValueEventListener
 import com.example.verbum.utilits.hideKeyboard
+import com.example.verbum.utilits.replaceFragment
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
 class AddContactsFragment: Fragment(R.layout.fragment_add_contacts) {
@@ -25,9 +26,7 @@ class AddContactsFragment: Fragment(R.layout.fragment_add_contacts) {
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            listContacts.forEach {
-                println(it.id)
-            }
+            replaceFragment(CreateGroupFragment(listContacts))
         }
     }
 

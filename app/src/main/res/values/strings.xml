@@ -32,4 +32,5 @@
     <string name="settings_label_bio">Напишите немного о себе</string>
     <string name="clear_chat">Очистить чат</string>
     <string name="delete_chat">Удалить чат</string>
+    <string name="create_group">Создать группу</string>
 </resources>

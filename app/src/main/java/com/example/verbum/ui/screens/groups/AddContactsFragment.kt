@@ -1,4 +1,4 @@
-package com.example.verbum.ui.screens.main_list
+package com.example.verbum.ui.screens.groups
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -8,13 +8,11 @@ import com.example.verbum.models.CommonModel
 import com.example.verbum.utilits.APP_ACTIVITY
 import com.example.verbum.utilits.AppValueEventListener
 import com.example.verbum.utilits.hideKeyboard
-import kotlinx.android.synthetic.main.fragment_main_list.*
+import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
-
-class MainListFragment : Fragment(R.layout.fragment_main_list) {
-
+class AddContactsFragment: Fragment(R.layout.fragment_add_contacts) {
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: MainListAdapter
+    private lateinit var mAdapter: AddContactsAdapter
     private val mRefMainList = FER_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID)
     private val mRefUsers = FER_DATABASE_ROOT.child(NODE_USERS)
     private val mRefMessages = FER_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
@@ -22,15 +20,20 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Verbum"
+        APP_ACTIVITY.title = "Добавить участника"
         APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
         initRecyclerView()
+        add_contacts_btn_next.setOnClickListener {
+            listContacts.forEach {
+                println(it.id)
+            }
+        }
     }
 
     private fun initRecyclerView() {
-        mRecyclerView = main_list_recycle_view
-        mAdapter = MainListAdapter()
+        mRecyclerView = add_contacts_recycle_view
+        mAdapter = AddContactsAdapter()
 
         // 1 запрос
         mRefMainList.addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot ->
@@ -46,12 +49,13 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                         mRefMessages.child(model.id).limitToLast(1)
                             .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot2 ->
                                 val tempList = dataSnapshot2.children.map { it.getCommonModel() }
-                                //newModel.lastMessage = tempList[0].text
+
                                 if (tempList.isEmpty()){
                                     newModel.lastMessage = "Чат очищен"
                                 } else {
                                     newModel.lastMessage = tempList[0].text
                                 }
+
 
                                 if (newModel.fullname.isEmpty()) {
                                     newModel.fullname = newModel.phone
@@ -63,5 +67,9 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
         })
 
         mRecyclerView.adapter = mAdapter
+    }
+
+    companion object{
+        val listContacts = mutableListOf<CommonModel>()
     }
 }

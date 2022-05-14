@@ -1,4 +1,4 @@
-package com.example.verbum.ui.screens
+package com.example.verbum.ui.screens.contacts
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
+import com.example.verbum.ui.screens.base.BaseFragment
 import com.example.verbum.ui.screens.single_chat.SingleChatFragment
 import com.example.verbum.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -44,7 +45,9 @@ class   ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 //Запускается тогда когда адаптер получает доступ к ViewGroup
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.contact_item, parent, false)
-                return ContactsHolder(view)
+                return ContactsHolder(
+                    view
+                )
             }
             // Заполняет holder
             override fun onBindViewHolder(

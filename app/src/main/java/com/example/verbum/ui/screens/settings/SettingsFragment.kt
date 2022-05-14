@@ -9,7 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.verbum.R
 import com.example.verbum.database.*
-import com.example.verbum.ui.screens.BaseFragment
+import com.example.verbum.ui.screens.base.BaseFragment
 import com.example.verbum.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

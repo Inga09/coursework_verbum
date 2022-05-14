@@ -7,9 +7,10 @@ import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.verbum.R
 import com.example.verbum.ui.screens.settings.SettingsFragment
-import com.example.verbum.ui.screens.ContactsFragment
+import com.example.verbum.ui.screens.contacts.ContactsFragment
 import com.example.verbum.utilits.APP_ACTIVITY
 import com.example.verbum.database.USER
+import com.example.verbum.ui.screens.groups.AddContactsFragment
 import com.example.verbum.utilits.downloadAndSetImage
 import com.example.verbum.utilits.replaceFragment
 //import com.example.verbum.ui.fragments.SettingsFragment
@@ -123,6 +124,7 @@ class AppDrawer {
     }
     private fun clickToItem(position:Int){
         when (position) {
+            1 -> replaceFragment(AddContactsFragment())
             7 -> replaceFragment(SettingsFragment())
             4 -> replaceFragment(ContactsFragment())
         }

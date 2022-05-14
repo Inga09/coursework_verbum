@@ -20,6 +20,7 @@
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/bg_receiving_message.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/bg_user_message.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_attach.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_choice.xml" value="0.23743589743589744" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_clear.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_confirm_change.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ic_delete.xml" value="0.24114583333333334" />
@@ -32,9 +33,11 @@
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/drawable/ripple_effect.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/activity_main.xml" value="0.21875" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/activity_register.xml" value="0.21875" />
+        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/add_contacts_item.xml" value="0.1693840579710145" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/bg_user_message.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/choice_upload.xml" value="0.17889492753623187" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/contact_item.xml" value="0.25" />
+        <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_add_contacts.xml" value="0.1693840579710145" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_base.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_change_bio.xml" value="0.19157608695652173" />
         <entry key="..\:/Users/yourm/StudioProjects/coursework_verbum/app/src/main/res/layout/fragment_change_name.xml" value="0.20697463768115942" />

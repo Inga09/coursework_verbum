@@ -1,4 +1,4 @@
-package com.example.verbum.ui.screens
+package com.example.verbum.ui.screens.base
 
 import android.view.*
 import androidx.fragment.app.Fragment

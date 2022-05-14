@@ -13,7 +13,7 @@ import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
 import com.example.verbum.models.UserModel
-import com.example.verbum.ui.screens.BaseFragment
+import com.example.verbum.ui.screens.base.BaseFragment
 import com.example.verbum.ui.screens.main_list.MainListFragment
 import com.example.verbum.ui.screens.message_recyler_view.views.AppViewFactory
 import com.example.verbum.utilits.*

@@ -3,7 +3,7 @@ package com.example.verbum.ui.screens.settings
 import com.example.verbum.R
 import com.example.verbum.database.USER
 import com.example.verbum.database.setNameToDatebase
-import com.example.verbum.ui.screens.BaseChangeFragment
+import com.example.verbum.ui.screens.base.BaseChangeFragment
 import com.example.verbum.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 

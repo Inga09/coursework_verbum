@@ -2,18 +2,18 @@
     <string name="app_name">verbum</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="settings_menu_change_name">Изменить имя</string>
-    <string name="settings_menu_exit">Выход</string>
+    <string name="settings_menu_change_name">Edit name</string>
+    <string name="settings_menu_exit">Log out</string>
     <string name="cd_register_image">register_image</string>
-    <string name="register_text_enter_code">Введите код</string>
-    <string name="register_text_we_sent">Мы отправили SMS с кодом проверки на Ваш телефон</string>
+    <string name="register_text_enter_code">Code</string>
+    <string name="register_text_we_sent">A code was sent via Verbum to your other devices, if you have any connected</string>
     <string name="register_hint_default_code">- - - - - -</string>
-    <string name="register_title_your_phone">ваш телефон</string>
-    <string name="register_toast_enter_phone">Введите номер телефона</string>
-    <string name="settings_hint_input_name">Имя</string>
-    <string name="settings_input_surname">Фамилия</string>
-    <string name="settings_toast_name_is_empty">Имя не может быть пустым</string>
-    <string name="toast_data_update">Данные обновлены</string>
+    <string name="register_title_your_phone">Your Phone Number</string>
+    <string name="register_toast_enter_phone">Please confirm your country code and enter your mobile phone number</string>
+    <string name="settings_hint_input_name">Name</string>
+    <string name="settings_input_surname">Last name</string>
+    <string name="settings_toast_name_is_empty">Invalid name. Please try again</string>
+    <string name="toast_data_update">Data updated</string>
     <!--<string name="settings_default_username">settings_default_username</string>-->
     <!-- <string name="settings_default_status">settings_default_status</string>
     <string name="settings_default_number">settings_default_number</string>-->
@@ -22,17 +22,17 @@
     <string name="settings_hint_input_username">username</string>
     <string name="settings_input_bio">bio</string>
     <string name="settings_default_username">Inga Arturovna</string>
-    <string name="settings_default_status">в сети</string>
-    <string name="settings_text_account">Аккаунт</string>
+    <string name="settings_default_status">online</string>
+    <string name="settings_text_account">Account</string>
     <string name="settings_default_number">79022834439</string>
-    <string name="settings_label_phone_number">Нажмите,чтобы изменить номер телефона</string>
+    <string name="settings_label_phone_number">Tap to change phone numbeer</string>
     <string name="settings_default_login">inga</string>
-    <string name="settings_label_login">Имя пользователя</string>
-    <string name="settings_default_bio">О себе</string>
-    <string name="settings_label_bio">Напишите немного о себе</string>
-    <string name="clear_chat">Очистить чат</string>
-    <string name="delete_chat">Удалить чат</string>
-    <string name="create_group">Создать группу</string>
+    <string name="settings_label_login">Username</string>
+    <string name="settings_default_bio">Bio</string>
+    <string name="settings_label_bio">Add a few words about yourself</string>
+    <string name="clear_chat">Clear history</string>
+    <string name="delete_chat">Delete chat</string>
+    <string name="create_group">New group</string>
 
 
     <plurals name="count_members">

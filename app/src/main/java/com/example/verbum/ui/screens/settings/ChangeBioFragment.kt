@@ -5,7 +5,7 @@ import com.example.verbum.database.USER
 import com.example.verbum.database.setBioToDateBase
 import com.example.verbum.ui.screens.base.BaseChangeFragment
 import kotlinx.android.synthetic.main.fragment_change_bio.*
-
+/* Фрагмент для изменения информации о пользователе */
 
 class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {
     override fun onResume() {

@@ -7,7 +7,7 @@ import com.example.verbum.ui.screens.base.BaseChangeFragment
 import com.example.verbum.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 
-
+/* Фрагмент для изменения имени пользователя */
 class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
     override fun onResume() {
         super.onResume()

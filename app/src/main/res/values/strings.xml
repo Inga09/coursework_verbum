@@ -14,7 +14,7 @@
     <string name="settings_input_surname">Last name</string>
     <string name="settings_toast_name_is_empty">Invalid name. Please try again</string>
     <string name="toast_data_update">Data updated</string>
-    <!--<string name="settings_default_username">settings_default_username</string>-->
+    <!--<string name="isettings_default_username">settings_default_username</string>-->
     <!-- <string name="settings_default_status">settings_default_status</string>
     <string name="settings_default_number">settings_default_number</string>-->
     <!--<string name="settings_default_login">settings_default_login</string>-->

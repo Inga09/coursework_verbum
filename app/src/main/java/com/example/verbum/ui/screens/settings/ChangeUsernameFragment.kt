@@ -6,7 +6,7 @@ import com.example.verbum.ui.screens.base.BaseChangeFragment
 import com.example.verbum.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*
-
+/* Фрагмент для изменения username пользователя */
 
 class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_username){
     lateinit var mNewUsername: String
@@ -34,6 +34,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
     }
 
 private fun changeUsername() {
+    /* Изменение username в базе данных */
 
     FER_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUsername).setValue(CURRENT_UID)
         .addOnCompleteListener {

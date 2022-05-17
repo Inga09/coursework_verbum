@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 //import com.google.firebase.database.DatabaseError
 //import com.google.firebase.database.ValueEventListener
 
-
+/* Главная активность*/
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        /* Функция запускается один раз, при создании активити */
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFunc() {
+        /* Функция инициализирует функциональность приложения */
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
             mAppDrawer.create()
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFields() {
+        /* Функция инициализирует переменные */
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer()
         //AUTH = FirebaseAuth.getInstance()

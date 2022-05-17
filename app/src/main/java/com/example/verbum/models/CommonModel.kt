@@ -1,5 +1,7 @@
 package com.example.verbum.models
 
+/* Общая модель для всех сущностей приложения*/
+
 data class CommonModel (
 val id: String = "",
 var username: String = "",

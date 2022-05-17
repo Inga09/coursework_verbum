@@ -6,7 +6,7 @@ import com.example.verbum.MainActivity
 import com.example.verbum.R
 import com.example.verbum.utilits.hideKeyboard
 
-
+/* Базовый фрагмент, от него наследуются фрагменты где происходит изменение данных о пользователе. */
 open class BaseChangeFragment (layout:Int): Fragment(layout) {
     override fun onStart() {
         super.onStart()
@@ -20,10 +20,12 @@ open class BaseChangeFragment (layout:Int): Fragment(layout) {
 
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        /* Создание выпадающего меню*/
         (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        /* Слушатель выбора пункта выпадающего меню */
         when (item.itemId) {
             R.id.settings_confirm_change -> change()
         }

@@ -8,7 +8,7 @@ import com.example.verbum.models.CommonModel
 import com.example.verbum.utilits.*
 import kotlinx.android.synthetic.main.fragment_main_list.*
 
-
+/* Главный фрагмент, содержит все чаты, группы и каналы с которыми взаимодействует пользователь*/
 class MainListFragment : Fragment(R.layout.fragment_main_list) {
 
     private lateinit var mRecyclerView: RecyclerView

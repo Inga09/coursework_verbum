@@ -21,7 +21,7 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
         super.onStart()
         /* Callback который возвращает результат верификации */
         mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-            /* Функция срабатывает если верификация уже была произведена,
+            /* Функция срабатывает если верификация(исходные данные) уже была произведена,
                 * пользователь авторизируется в приложении без потверждения по смс */
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 AUTH.signInWithCredential(credential).addOnCompleteListener(){ task->

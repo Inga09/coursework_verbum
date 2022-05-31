@@ -3,6 +3,8 @@ package com.example.verbum
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ListView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.verbum.database.AUTH
@@ -13,9 +15,12 @@ import com.example.verbum.ui.screens.main_list.MainListFragment
 import com.example.verbum.ui.screens.register.EnterPhoneNumberFragment
 import com.example.verbum.ui.objects.AppDrawer
 import com.example.verbum.utilits.*
+import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.crypto.Cipher
+import javax.crypto.spec.SecretKeySpec
 
 
 //import com.example.verbum.database.getAUTH

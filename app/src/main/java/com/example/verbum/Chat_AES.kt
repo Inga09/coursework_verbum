@@ -2,23 +2,25 @@ package com.example.verbum
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import java.io.UnsupportedEncodingException
+import java.security.AccessController.getContext
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
+import java.time.LocalDate
 import java.util.*
 import javax.crypto.BadPaddingException
 import javax.crypto.Cipher
 import javax.crypto.IllegalBlockSizeException
 import javax.crypto.NoSuchPaddingException
 import javax.crypto.spec.SecretKeySpec
+import kotlin.jvm.Throws
 
 class Chat_AES: AppCompatActivity() {
     private lateinit var editText: EditText;
@@ -53,32 +55,38 @@ class Chat_AES: AppCompatActivity() {
             }
             secretKeySpec = SecretKeySpec(encryptionKey, "AES")
 
-            FER_DATABASE_ROOT.addValueEventListener(ValueEventListener() {
-                @Override
-                public fun onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            FER_DATABASE_ROOT.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    stringMessage = (String) dataSnapshot . getValue ();
+                    stringMessage = dataSnapshot.getValue().toString()
                     if (stringMessage != null) {
-                        stringMessage = stringMessage.substring(1, stringMessage.length() - 1);
+                        stringMessage = stringMessage.substring(1, stringMessage.length - 1);
                     }
-                    assert stringMessage != null;
-                    String[] stringMessageArray;
-                    var stringMessageArray = ", ".split(stringMessage);
+                    assert(stringMessage != null)
+                    //val strs = "name, 2012, 2017".split(",").toTypedArray()
+                    //val stringMessageArray = arrayOf(", ".split(stringMessage))
+                    val stringMessageArray = stringMessage.split(", ").toTypedArray()
                     Arrays.sort(stringMessageArray);
-                    String[] stringFinal = new String[stringMessageArray.length * 2];
+                    var stringFinalInt = arrayOf(stringMessageArray.count() * 2)
+                    var stringFinal = stringFinalInt.map { it.toString() }.toTypedArray()
 
                     try {
-                        for (int i = 0; i < stringMessageArray.length; i++) {
-                            String[] stringKeyValue = stringMessageArray [i].split("=", 2);
-                            stringFinal[2 * i] =
-                                (String) android . text . format . DateFormat . format ("dd-MM-yyyy hh:mm:ss", Long.parseLong(stringKeyValue[0]));
-                            stringFinal[2 * i + 1] = AESDecryptionMethod(stringKeyValue[1]);
+                        for (i in stringMessageArray.indices) {
+                            //var stringKeyValue = arrayOf(stringMessageArray[i].split("=", limit = 2))
+                            var stringKeyValue =
+                                stringMessageArray[i].split("=", limit = 2).toTypedArray()
+                            stringFinal[2 * i] = android.text.format.DateFormat.format(
+                                "dd-MM-yyyy hh:mm:ss",
+                                stringKeyValue[0].toLong()
+                            ).toString()
+                            stringFinal[2 * i + 1] =
+                                AESDecryptionMethod(stringKeyValue[1]).toString()
                         }
 
 
                         listView.setAdapter(
-                            new ArrayAdapter < String >(
-                                Chat_AES.this,
+                             ArrayAdapter <String>(
+                                 this@Chat_AES,
                                 android.R.layout.simple_list_item_1,
                                 stringFinal
                             )
@@ -89,8 +97,7 @@ class Chat_AES: AppCompatActivity() {
 
                 }
 
-                @Override
-                fun onCancelled(@NonNull DatabaseError databaseError) {
+                override fun onCancelled(databaseError: DatabaseError) {
 
                 }
             });
@@ -100,54 +107,61 @@ class Chat_AES: AppCompatActivity() {
     }
 
 
-        private fun  AESEncryptionMethod(string: String ){
-            var    stringByte: ByteArray  = string.getBytes();
-            var  encrypteByte:  ByteArray = byte[stringByte.length];
+    private fun AESEncryptionMethod(string: String) :String {
+        //var stringByte: ByteArray = string.getBytes();
+        //private var encryptionKey: ByteArray =  byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6)
+        var stringByte: ByteArray = string.toByteArray()
+        //var encrypteByte: ByteArray = byte[stringByte.length];
+        var encrypteByte: ByteArray = byteArrayOf(stringByte.count().toByte())
 
-            try {
-                cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec)
-                encrypteByte=cipher.doFinal(stringByte);
-            } catch (e: InvalidKeyException) {
-                e.printStackTrace();
-            } catch (e: BadPaddingException) {
-                e.printStackTrace();
-            } catch (e: IllegalBlockSizeException) {
-                e.printStackTrace();
-            }
-            String returnString = null;
-            try {
-                returnString = String(encrypteByte,"ISO-8859-1");
-            } catch (e: UnsupportedEncodingException) {
-                e.printStackTrace();
-            }
-            return returnString;
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec)
+            encrypteByte = cipher.doFinal(stringByte);
+        } catch (e: InvalidKeyException) {
+            e.printStackTrace();
+        } catch (e: BadPaddingException) {
+            e.printStackTrace();
+        } catch (e: IllegalBlockSizeException) {
+            e.printStackTrace();
         }
-        private fun AESDecryptionMethod(String string) throws UnsupportedEncodingException {
-            byte[] EncryptedByte = string.getBytes("ISO-8859-1");
-            String decryptedString = string;
-
-            byte[] decryption;
-
-            try {
-                decipher.init(cipher.DECRYPT_MODE, secretKeySpec);
-                decryption = decipher.doFinal(EncryptedByte);
-                decryptedString = new String(decryption);
-            } catch (InvalidKeyException e) {
-                e.printStackTrace();
-            } catch (BadPaddingException e) {
-                e.printStackTrace();
-            } catch (IllegalBlockSizeException e) {
-                e.printStackTrace();
-            }
-            return decryptedString;
+        var returnString = "";
+        try {
+            //returnString = String(encrypteByte, "ISO-8859-1")
+            returnString = String(encrypteByte, charset("ISO-8859-1"))
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace();
         }
+        return returnString;
+    }
 
-        public void sendButton(View view) {
-            Date date=new Date();
-            databaseReference.child(Long.toString(date.getTime())).setValue(AESEncryptionMethod(editText.getText().toString()));
+    private fun AESDecryptionMethod(string: String) :String
+    {
+        var EncryptedByte: ByteArray = string.toByteArray(charset("ISO-8859-1"))
+        var decryptedString = string
+
+        var decryption = byteArrayOf()
+
+        try {
+            decipher.init(Cipher.DECRYPT_MODE, secretKeySpec)
+            decryption = decipher.doFinal(EncryptedByte)
+            decryptedString = decryption.toString()
+        } catch (e: InvalidKeyException ) {
+            e.printStackTrace();
+        } catch (e: BadPaddingException ) {
+            e.printStackTrace();
+        } catch (e: IllegalBlockSizeException ) {
+            e.printStackTrace();
+        }
+        return decryptedString;
+    }
+
+
+        public fun sendButton(view: View) {
+            //Date date=new Date();
+            var date = Date()
+            FER_DATABASE_ROOT.child((date.time).toString()).setValue(AESEncryptionMethod(editText.text.toString()));
             editText.setText("");
         }
-    }
     }
 
 

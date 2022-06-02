@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.verbum.Chat_AES
+import com.example.verbum.MyCrypt
 import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
@@ -27,6 +29,7 @@ import kotlinx.android.synthetic.main.toolbar_info.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class SingleChatFragment(private val contact: CommonModel) :
@@ -53,6 +56,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         initFields()
         initToolbar()
         initRecycleView()
+
     }
     private fun initFields() {
         setHasOptionsMenu(true)
@@ -190,6 +194,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
 
         private fun initToolbar() {
+            val thisCrypt = MyCrypt()
             mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_info
             mToolbarInfo.visibility = View.VISIBLE
             mListenerInfoToolbar = AppValueEventListener {
@@ -203,10 +208,12 @@ class SingleChatFragment(private val contact: CommonModel) :
 
             chat_btn_send_message.setOnClickListener {
                 mSmoothScrollToPosition = true
-                val message = chat_input_message.text.toString()
+                //val message = chat_input_message.text.toString()
+                val message = thisCrypt.encrypt(chat_input_message.text.toString())
                 if (message.isEmpty()) {
-                    showToast("ВВедите сообщение")
-                } else sendMessage(
+                    showToast("Введите сообщение")
+                }
+                else sendMessage(
                     message,
                     contact.id,
                     TYPE_TEXT
@@ -261,7 +268,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        /* Создания выпадающего меню*/
+        /* Создание выпадающего меню*/
         activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
     }
 

@@ -2,6 +2,7 @@ package com.example.verbum.ui.screens.main_list
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.verbum.MyCrypt
 import com.example.verbum.R
 import com.example.verbum.database.*
 import com.example.verbum.models.CommonModel
@@ -46,6 +47,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
         mRecyclerView.adapter = mAdapter
     }
     private fun showGroup(model: CommonModel) {
+        val thisCrypt = MyCrypt()
         // 2 запрос
         FER_DATABASE_ROOT.child(NODE_GROUPS).child(model.id)
             .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot1 ->
@@ -60,7 +62,8 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                         if (tempList.isEmpty()) {
                             newModel.lastMessage = "Чат очищен"
                         } else {
-                            newModel.lastMessage = tempList[0].text
+                            //newModel.lastMessage = tempList[0].text
+                            newModel.lastMessage =thisCrypt.decrypt(tempList[0].text)
                         }
                         newModel.type = TYPE_GROUP
                         mAdapter.updateListItems(newModel)
@@ -69,6 +72,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
             })
     }
     private fun showChat(model: CommonModel) {
+        val thisCrypt = MyCrypt()
         // 2 запрос
         mRefUsers.child(model.id)
             .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot1 ->
@@ -82,7 +86,22 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                         if (tempList.isEmpty()) {
                             newModel.lastMessage = "Чат очищен"
                         } else {
-                            newModel.lastMessage = tempList[0].text
+                            //newModel.lastMessage = tempList[0].text
+                                if (tempList[0].type == "text") {
+                                    newModel.lastMessage = thisCrypt.decrypt(tempList[0].text)
+                                }
+                                else if (tempList[0].type == "image")
+                                {
+                                    newModel.lastMessage = "Image"
+                                }
+                                else if (tempList[0].type == "voice")
+                                {
+                                    newModel.lastMessage = "Voice message"
+                                }
+                                else if (tempList[0].type == "file")
+                                {
+                                    newModel.lastMessage = "File"
+                                }
                         }
 
 

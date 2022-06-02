@@ -2,6 +2,7 @@ package com.example.verbum.ui.screens.single_chat
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.verbum.MyCrypt
 import com.example.verbum.ui.screens.message_recyler_view.view_holder.*
 import com.example.verbum.ui.screens.message_recyler_view.views.MessageView
 
@@ -9,9 +10,6 @@ class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mListMessagesCache = mutableListOf<MessageView>()
     private var mListHolders = mutableListOf<MessageHolder>()
-
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -42,6 +40,8 @@ class SingleChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun addItemToBottom(item: MessageView,
                         onSuccess: () -> Unit){
         if (!mListMessagesCache.contains(item)) {
+            /*val thisCrypt = MyCrypt()
+            item.text = thisCrypt.decrypt(item.text)*/
             mListMessagesCache.add(item)
             notifyItemInserted(mListMessagesCache.size)
         }

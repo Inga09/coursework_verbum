@@ -80,7 +80,7 @@ class Chat_AES: AppCompatActivity() {
                                 stringKeyValue[0].toLong()
                             ).toString()
                             stringFinal[2 * i + 1] =
-                                AESDecryptionMethod(stringKeyValue[1]).toString()
+                                AESDecryptionMethod(stringKeyValue[1])
                         }
 
 
@@ -107,7 +107,7 @@ class Chat_AES: AppCompatActivity() {
     }
 
 
-    private fun AESEncryptionMethod(string: String) :String {
+    public fun AESEncryptionMethod(string: String) :String {
         //var stringByte: ByteArray = string.getBytes();
         //private var encryptionKey: ByteArray =  byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6)
         var stringByte: ByteArray = string.toByteArray()
@@ -134,7 +134,7 @@ class Chat_AES: AppCompatActivity() {
         return returnString;
     }
 
-    private fun AESDecryptionMethod(string: String) :String
+    public fun AESDecryptionMethod(string: String) :String
     {
         var EncryptedByte: ByteArray = string.toByteArray(charset("ISO-8859-1"))
         var decryptedString = string
@@ -156,13 +156,13 @@ class Chat_AES: AppCompatActivity() {
     }
 
 
-        public fun sendButton(view: View) {
-            //Date date=new Date();
-            var date = Date()
-            FER_DATABASE_ROOT.child((date.time).toString()).setValue(AESEncryptionMethod(editText.text.toString()));
-            editText.setText("");
-        }
+    public fun sendButton(view: View)
+    {
+        var date = Date()
+        FER_DATABASE_ROOT.child((date.time).toString()).setValue(AESEncryptionMethod(editText.text.toString()));
+        editText.setText("");
     }
+}
 
 
 

@@ -6,7 +6,7 @@ interface MessageView {
     val from: String
     val timeStamp: String
     val fileUrl: String
-    val text: String
+    var text: String
 
     companion object {
         val MESSAGE_IMAGE: Int

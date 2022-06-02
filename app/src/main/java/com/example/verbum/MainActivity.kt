@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     internal lateinit var mAppDrawer: AppDrawer
     lateinit var mToolbar: Toolbar
-    // gjhyj
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         /* Функция запускается один раз, при создании активити */
